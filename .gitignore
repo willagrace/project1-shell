@@ -1,0 +1,9 @@
+# Build output
+bin/
+obj/
+*.o
+
+# OS / editor files
+.DS_Store
+.vscode/
+.claude/
