@@ -2,6 +2,8 @@
 #include "prompt.h"
 #include "jobs.h"
 #include "builtins.h"
+#include "expand.h"
+#include "path_search.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,7 +36,6 @@ int main(void)
         }
 
         tokenlist *tokens = get_tokens(input);
-
         /*
          * Ignore empty commands.
          */
@@ -43,7 +44,8 @@ int main(void)
             free_tokens(tokens);
             continue;
         }
-
+        // Parts 2&3: Expand environment variables and tilde (~) in tokens.
+        expand_tokens(tokens);
         /*
          * Part 9
          */
@@ -71,17 +73,25 @@ int main(void)
         }
 
         /*
+         * Part 4: find the program to run. Commands containing '/' are used
+         * as-is; everything else is searched for in $PATH.
+         */
+        char *path = search_path(tokens->items[0]);
+
+        if (path == NULL) {
+            fprintf(stderr, "%s: command not found\n", tokens->items[0]);
+            free(input);
+            free_tokens(tokens);
+            continue;
+        }
+        /*
          * ===================================
          * TEAMMATES' CODE GOES HERE
          * ===================================
          *
-         * Part 2: Environment variables
-         * Part 3: Tilde expansion
-         * Part 4: PATH search
-         * Part 5: External execution
+         * Part 5: fork(), then execv(path, tokens->items) in the child
          * Part 6: I/O redirection
          * Part 7: Pipes
-         *
          *
          * Once Part 5 forks:
          *
@@ -93,14 +103,15 @@ int main(void)
          *
          *     waitpid(pid, NULL, 0);
          *
-         *
          * Once the command is known to be valid:
          *
          *     add_to_history(input);
          */
 
+        free(path);
         free(input);
         free_tokens(tokens);
+
     }
 
     return 0;
