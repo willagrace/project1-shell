@@ -82,7 +82,7 @@ void check_background_jobs(void)
         if (result == jobs[i].pid) {
 
             printf(
-                "[%d]+ done %s\n",
+                "[%d] + done %s\n",
                 jobs[i].job_number,
                 jobs[i].command
             );

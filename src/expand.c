@@ -16,7 +16,7 @@ tokenlist * expand_env_vars(tokenlist *tokens) {
 		if (token[0] == '$') {
 			char *env_var = getenv(token + 1);
 			free(tokens->items[i]);
-			
+
 			if (env_var != NULL) {
 				tokens->items[i] = (char *)malloc(strlen(env_var) + 1);
 				strcpy(tokens->items[i], env_var);
@@ -24,7 +24,7 @@ tokenlist * expand_env_vars(tokenlist *tokens) {
 				tokens->items[i] = (char *)malloc(1);
 				tokens->items[i][0] = '\0';
 			}
-		
+
 		}
 	}
 	return tokens;
@@ -39,11 +39,8 @@ tokenlist * expand_tilde(tokenlist *tokens) {
 
 	for (size_t i = 0; i < tokens->size; i++) {
 		char *token = tokens->items[i];
+
 		if (token[0] == '~' && (token[1] == '\0' || token[1] == '/')) {
-			continue;
-		}
-		
-		if (token[0] == '~') {
 			size_t new_size = strlen(home_dir) + strlen(token + 1) + 1;
 			char *expanded_token = (char *)malloc(new_size);
 			strcpy(expanded_token, home_dir);
