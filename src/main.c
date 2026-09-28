@@ -3,7 +3,7 @@
 #include "jobs.h"
 #include "builtins.h"
 #include "expand.h"
-#include "path_search.h"
+#include "execute.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -73,42 +73,14 @@ int main(void)
         }
 
         /*
-         * Part 4: find the program to run. Commands containing '/' are used
-         * as-is; everything else is searched for in $PATH.
+         * Parts 4-8: search $PATH for each command, then fork/execv it with
+         * any redirection, pipes, and background processing.
          */
-        char *path = search_path(tokens->items[0]);
-
-        if (path == NULL) {
-            fprintf(stderr, "%s: command not found\n", tokens->items[0]);
-            free(input);
-            free_tokens(tokens);
-            continue;
+        if (execute_command(tokens, input) == 0) {
+            add_to_history(input);
         }
-        /*
-         * ===================================
-         * TEAMMATES' CODE GOES HERE
-         * ===================================
-         *
-         * Part 5: fork(), then execv(path, tokens->items) in the child
-         * Part 6: I/O redirection
-         * Part 7: Pipes
-         *
-         * Once Part 5 forks:
-         *
-         * if background:
-         *
-         *     add_background_job(pid, input);
-         *
-         * otherwise:
-         *
-         *     waitpid(pid, NULL, 0);
-         *
-         * Once the command is known to be valid:
-         *
-         *     add_to_history(input);
-         */
 
-        free(path);
+
         free(input);
         free_tokens(tokens);
 
