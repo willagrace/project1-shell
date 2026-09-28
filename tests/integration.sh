@@ -94,6 +94,7 @@ stderr: $ERR"; fi
 out_has() { printf '%s\n' "$OUT" | grep -qF -- "$1"; }
 out_line() { printf '%s\n' "$OUT" | grep -qxE -- "$1"; }
 out_lacks() { ! printf '%s\n' "$OUT" | grep -qF -- "$1"; }
+no_line() { ! printf '%s\n' "$OUT" | grep -qxF -- "$1"; }
 raw_has() { printf '%s\n' "$RAW" | grep -qF -- "$1"; }
 err_has() { printf '%s\n' "$ERR" | grep -qiF -- "$1"; }
 err_nonempty() { [ -n "$ERR" ]; }
@@ -179,7 +180,7 @@ fresh
 run_shell 'echo hi > out.txt'
 expect 6 "cmd > file writes the file" file_is out.txt "hi"
 expect 6 "output file is created -rw-------" perms_are out.txt "-rw-------"
-expect 6 "redirected output is not printed" out_lacks "hi"
+expect 6 "redirected output is not printed" no_line "hi"
 
 fresh
 printf 'an old line that is longer\n' > "$WORK/out.txt"
