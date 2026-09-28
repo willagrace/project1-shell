@@ -53,8 +53,8 @@ Project 1 for Section 1 of Operating Systems Fall 2026.
 - **Assigned to**: Terryon Larkins
 
 ### Extra Credit
-- **Responsibilities**: [Description]
-- **Assigned to**: [TBD]
+- **Responsibilities**: Add support for unlimited pipes, add support for piping and I/O redirection in one command, execute your shell from within a running process repeatedly
+- **Assigned to**: Willa Gutowski
 
 ## File Listing
 ```
@@ -163,9 +163,9 @@ Document in-person meetings, their purpose, and what was discussed.
     never ends. Planned fix: return `NULL` from `get_input()` at end of input.
 
 ## Extra Credit
-- **Extra Credit 1**: [Extra Credit Option]
-- **Extra Credit 2**: [Extra Credit Option]
-- **Extra Credit 3**: [Extra Credit Option]
+- **Extra Credit 1**: Support for unlimited piping
+- **Extra Credit 2**: Support for I/O redirection and unlimited piping in one command
+- **Extra Credit 3**: execute shell from within a running process
 
 ## Considerations
 We had to reevaluate the division of labor because time constraints limited our ability
