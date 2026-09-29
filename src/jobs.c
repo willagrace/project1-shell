@@ -9,6 +9,10 @@
 static Job jobs[MAX_JOBS];
 static int next_job_number = 1;
 
+/*This function basically, initializes the background job list. Before anything
+ * really happens in the shell, we start marking off the job slots as inactive.*/
+
+
 void jobs_init(void)
 {
     int i;
@@ -17,6 +21,8 @@ void jobs_init(void)
         jobs[i].active = false;
     }
 }
+
+/*this function just checks whether or not a command should run in the background. A job would be considered a background command if its last token is "&"*/
 
 bool is_background(tokenlist *tokens)
 {
@@ -27,9 +33,15 @@ bool is_background(tokenlist *tokens)
     return strcmp(tokens->items[tokens->size - 1], "&") == 0;
 }
 
+
+/*this just assigns a new background process to the job list. The new background is assigned a unique
+ *  job number, and then the new background process's PID and original command is stored*/
+
 int add_background_job(pid_t pid, const char *command) {
     return add_background_pipeline(&pid, 1, command);
 }
+
+/* */
 
 int add_background_pipeline(const pid_t *pids, size_t num_pids, const char *command)
 {
@@ -70,6 +82,9 @@ int add_background_pipeline(const pid_t *pids, size_t num_pids, const char *comm
 
     return -1;
 }
+
+
+/*checks active background jobs to see if they have finished. Uses waitpid() with WNOHANG so shell does not block while checking. Completed jobs are reported to the user and marked as inactive.*/
 
 void check_background_jobs(void)
 {
@@ -114,6 +129,9 @@ void check_background_jobs(void)
     }
 }
 
+
+/*This prints all currently active background jobs. Specifically, the job's job number, PID, and origianl command are displayed when this function executes.*/
+
 void print_jobs(void)
 {
     int i;
@@ -138,6 +156,9 @@ void print_jobs(void)
         printf("No active background processes.\n");
     }
 }
+
+
+/*this makes the system wait for all background processes to be completed. We have this in order to make sure no processes are still running while we are trying to exit.*/
 
 void wait_for_background_jobs(void)
 {

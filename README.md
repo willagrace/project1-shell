@@ -117,13 +117,20 @@ Each member records their contributions here. Use of AI is detailed in each deve
 | YYYY-MM-DD | [Description of task]  |
 | YYYY-MM-DD | [Description of task]  |
 
-### [Member 2]
+### Terryon Larkins
 
 | Date       | Work Completed / Notes |
 |------------|------------------------|
 | YYYY-MM-DD | [Description of task]  |
-| YYYY-MM-DD | [Description of task]  |
-| YYYY-MM-DD | [Description of task]  |
+| 2026-09-26 | Implemented Parts 1, 8, and 9.   |
+| 2026-09-28 | Wrote notes for the implementation of parts 1, 8, and 9  |
+| 2026-09-28 | Merged notes into main branch |
+
+**Use of AI:** I used ChatGPT to generate the first draft of code for my parts. I have been using the test 
+to check my own work. In addition, to be very specific, I used google's ai as a cheatsheet for git commands,
+since I'm not entirely comfortable with them. But I also tried using git's own official cheat sheet when I could.
+Before submission, I manually checked if my specific portions worked as intended. Lastly, used AI, textbook, and module notes
+to check over my understanding og my functions and parts.
 
 
 ### Carter Rudolph

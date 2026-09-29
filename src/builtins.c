@@ -14,7 +14,7 @@ static int history_count = 0;
 
 
 /*
- * Add a valid command to our three-command history.
+ * Add a valid command to our three-command history. Stores only the three most recent valid commands. If there are less than 3 valid commands, then the ones that are valid are printed.
  */
 void add_to_history(const char *command)
 {
@@ -50,6 +50,9 @@ void add_to_history(const char *command)
 }
 
 
+/*this just displays the commands that are currently stored in the command history. If there are no valid commands then it will say that as well.*/
+
+
 static void print_history(void)
 {
     int i;
@@ -66,6 +69,8 @@ static void print_history(void)
     }
 }
 
+
+/*implementing the cd command. This will allow the user to change to the requested directory, or it will go home if no path is given. If there are too many arguments given or the directory cannot be accessed then an error will be displayed.*/
 
 static int builtin_cd(tokenlist *tokens)
 {
@@ -108,6 +113,9 @@ static int builtin_cd(tokenlist *tokens)
 }
 
 
+/*implementing the jobs command. This will scan for any completed background jobs and it will display all of the jobs that are still in progress (it will display the jobs that are still "active")*
+ */
+
 static int builtin_jobs(void)
 {
     check_background_jobs();
@@ -117,6 +125,8 @@ static int builtin_jobs(void)
 }
 
 
+
+/*Exit command. Before it exits, it will wait on background jobs to finish. Once they finish, the recent command history will be shown and then the shell will be exited out of.*/
 static int builtin_exit(void)
 {
     /*
@@ -131,6 +141,7 @@ static int builtin_exit(void)
 }
 
 
+/*Checks whether the first token is one of the shell's built-in commands like cd, jobs, or exit.*/
 bool is_builtin(tokenlist *tokens)
 {
     if (tokens == NULL || tokens->size == 0) {
@@ -153,6 +164,8 @@ bool is_builtin(tokenlist *tokens)
 }
 
 
+
+/*Executes the appropriate built-in command based on the first token present in the command.*/
 int execute_builtin(tokenlist *tokens)
 {
     if (tokens == NULL || tokens->size == 0) {
