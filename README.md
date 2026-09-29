@@ -109,13 +109,15 @@ This will run the program `bin/shell`. It can also be started directly with
 ## Development Log
 Each member records their contributions here. Use of AI is detailed in each developer's log.
 
-### [Member 1]
+### Willa Gutowski
 
 | Date       | Work Completed / Notes |
 |------------|------------------------|
-| YYYY-MM-DD | [Description of task]  |
-| YYYY-MM-DD | [Description of task]  |
-| YYYY-MM-DD | [Description of task]  |
+| 2026-09-20 | Planned tasks, reviewed C, etc. no project coding |
+| 2026-09-26-27 | Implemented 5, 6, 7   |
+| 2026-09-28 | Implemented EC and merged  |
+
+**Use of AI:** I used Claude Opus and Sonnet for concept review and code idea generation, but did not invite Claude as a collaborator on the repo. I spent time reviewing integrating the sensible output into my files, and thinking about how my changes would interact with teammate's code before committing/pushing. 
 
 ### Terryon Larkins
 
