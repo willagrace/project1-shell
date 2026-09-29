@@ -162,14 +162,7 @@ Document in-person meetings, their purpose, and what was discussed.
 
 
 ## Bugs
-- **Bug 1: infinite loop at end of input** (will fix)
-  - **When:** runtime, when input ends without `exit` (Ctrl-D, or commands piped in
-    from a file).
-  - **First showed up:** in the main loop from Parts 1, 8, and 9 (`main.c`).
-  - **Symptoms:** the shell prints prompts forever and never exits.
-  - **Cause / fix attempted:** `main.c` exits the loop when `get_input()` returns `NULL`,
-    but `get_input()` (`lexer.c`) returns an empty string at end of input, so the loop
-    never ends. Planned fix: return `NULL` from `get_input()` at end of input.
+No known bugs!
 
 ## Extra Credit
 - **Extra Credit 1**: Support for unlimited piping
@@ -179,4 +172,3 @@ Document in-person meetings, their purpose, and what was discussed.
 ## Considerations
 We had to reevaluate the division of labor because time constraints limited our ability
 to meet as a group.
-
